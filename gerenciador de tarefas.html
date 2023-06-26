@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gerenciador de Tarefas</title>
+  <style>
+    /* Estilos CSS para o aplicativo */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    
+    form {
+      display: flex;
+      margin-bottom: 20px;
+    }
+    
+    input[type="text"] {
+      flex: 1;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    
+    button[type="submit"] {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+    
+    button.delete-button {
+      background-color: #f44336;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    .creator {
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Gerenciador de Tarefas</h1>
+  
+    <form id="task-form">
+      <input type="text" id="task-input" placeholder="Adicionar nova tarefa" required>
+      <button type="submit">Adicionar</button>
+    </form>
+  
+    <ul id="task-list">
+      <!-- Tarefas adicionadas serão exibidas aqui -->
+    </ul>
+
+    <div class="creator">
+      <button disabled style="background: none; border: none; cursor: default;">
+        Criado por pheh01
+      </button>
+    </div>
+  </div>
+  
+  <script>
+    // Lógica interativa e funcionalidade do tema
+    const taskForm = document.getElementById('task-form');
+    const taskInput = document.getElementById('task-input');
+    const taskList = document.getElementById('task-list');
+  
+    taskForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      const taskText = taskInput.value.trim();
+      if (taskText !== '') {
+        const taskItem = document.createElement('li');
+        taskItem.textContent = taskText;
+        
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Excluir';
+        deleteButton.classList.add('delete-button');
+        deleteButton.addEventListener('click', function() {
+          taskItem.remove();
+        });
+        
+        taskItem.appendChild(deleteButton);
+        taskList.appendChild(taskItem);
+        
+        taskInput.value = '';
+      }
+    });
+  </script>
+</body>
+</html>
